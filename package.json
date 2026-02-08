@@ -1,0 +1,183 @@
+{
+  "name": "javascript-project-console-cleaner",
+  "displayName": "JavaScript Console Cleaner",
+  "description": "Automatically detect and remove console.log statements from JavaScript/TypeScript projects with a beautiful sidebar interface",
+  "version": "1.0.0",
+  "publisher": "harsh-jolapara",
+  "icon": "media/clean.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harshj-1703/js-project-console-cleaner"
+  },
+  "bugs": {
+    "url": "https://github.com/harshj-1703/js-project-console-cleaner/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "console",
+    "cleaner",
+    "javascript",
+    "typescript",
+    "debug",
+    "cleanup",
+    "logs",
+    "remove console",
+    "clean code"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "consoleCleaner",
+          "title": "JavaScript Console Cleaner",
+          "icon": "media/clean.svg"
+        }
+      ]
+    },
+    "views": {
+      "consoleCleaner": [
+        {
+          "id": "consoleCleanerView",
+          "name": "Project Cleaner",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "consoleCleaner.cleanProject",
+        "title": "Console Cleaner: Clean All Console Logs",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "consoleCleaner.cleanFile",
+        "title": "Console Cleaner: Clean File",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "consoleCleaner.rescan",
+        "title": "Console Cleaner: Rescan Project",
+        "icon": "$(refresh)"
+      }
+    ],
+    "configuration": {
+      "title": "JavaScript Console Cleaner",
+      "properties": {
+        "consoleCleaner.ignoreFolders": {
+          "type": "array",
+          "default": [
+            "node_modules",
+            "build",
+            "dist",
+            ".next",
+            "out",
+            "coverage",
+            ".git",
+            ".vscode",
+            "vendor",
+            "tmp",
+            "temp"
+          ],
+          "description": "Folders to ignore when scanning for console logs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "consoleCleaner.fileExtensions": {
+          "type": "array",
+          "default": [
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx",
+            ".mjs",
+            ".cjs"
+          ],
+          "description": "File extensions to scan for console logs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "consoleCleaner.consoleMethods": {
+          "type": "array",
+          "default": [
+            "log",
+            "warn",
+            "error",
+            "info",
+            "debug",
+            "trace",
+            "table",
+            "time",
+            "timeEnd",
+            "assert",
+            "count",
+            "dir",
+            "dirxml",
+            "group",
+            "groupCollapsed",
+            "groupEnd",
+            "clear"
+          ],
+          "description": "Console methods to detect and remove",
+          "items": {
+            "type": "string"
+          }
+        },
+        "consoleCleaner.autoScanOnStartup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically scan workspace for console logs on startup"
+        },
+        "consoleCleaner.confirmBeforeCleaning": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show confirmation dialog before cleaning console logs"
+        }
+      }
+    },
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "consoleCleaner.cleanProject",
+          "when": "workspaceFolderCount > 0"
+        },
+        {
+          "command": "consoleCleaner.cleanFile",
+          "when": "false"
+        },
+        {
+          "command": "consoleCleaner.rescan",
+          "when": "workspaceFolderCount > 0"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.55.0",
+    "typescript": "^5.3.3"
+  }
+}
