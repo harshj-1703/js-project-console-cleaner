@@ -3,11 +3,6 @@ import * as fs from "fs";
 import * as path from "path";
 import { SidebarProvider } from "./sidebar";
 
-interface FileConsoleInfo {
-  path: string;
-  count: number;
-}
-
 let filesWithConsoleLogs: Map<string, number> = new Map();
 let sidebarProviderInstance: SidebarProvider | undefined;
 
@@ -452,9 +447,6 @@ function removeConsoleLogs(content: string): string {
     );
 
     result = result.replace(complexPattern, (match) => {
-      const lines = match.split("\n");
-      const firstLine = lines[0].trimStart();
-
       if (!match.includes("{") && !match.includes("function")) {
         return "";
       }

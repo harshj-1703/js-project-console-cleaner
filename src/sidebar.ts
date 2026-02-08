@@ -71,7 +71,9 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
   }
 
   private render() {
-    if (!this._view) return;
+    if (!this._view) {
+      return;
+    }
 
     const files = this.getFiles();
     const workspace = vscode.workspace.workspaceFolders
