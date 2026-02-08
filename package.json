@@ -2,7 +2,7 @@
   "name": "javascript-project-console-cleaner",
   "displayName": "JavaScript Console Cleaner",
   "description": "Automatically detect and remove console.log statements from JavaScript/TypeScript projects with a beautiful sidebar interface",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "harsh-jolapara",
   "icon": "media/clean.png",
   "repository": {
